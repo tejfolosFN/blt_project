@@ -17,7 +17,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
             public float JumpForce = 30f;
 
             [HideInInspector] public float CurrentTargetSpeed = 8f;
-            
 
             public void UpdateDesiredTargetSpeed(Vector2 input)
             {
@@ -43,7 +42,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         }
 
-
         public bool canrotate;
         public Camera cam;
         public MovementSettings movementSettings = new MovementSettings();
@@ -55,12 +53,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         public bool Wallrunning;
 
-
-
-        private Rigidbody m_RigidBody;
+        public static Rigidbody m_RigidBody;
         private CapsuleCollider m_Capsule;
         private float m_YRotation;
-        private bool  m_IsGrounded;
+        public static bool m_IsGrounded;
 
 
         public Vector3 Velocity
@@ -105,8 +101,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 }
 
                 Crouching();
-
             }
+            
 
         }
 
@@ -121,7 +117,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 mouseLook.LookOveride(transform, cam.transform);
             }
-         
+            
 
         }
         public void CamGoBack(float speed)
@@ -149,7 +145,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             //grounded
             if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) && m_IsGrounded && !Wallrunning)
             {
-                FindObjectOfType<AudioManager>().Play("PlayerRun");
+                
 
                 if (Input.GetAxisRaw("Vertical") > 0.3f)
                 {
@@ -167,7 +163,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 {
                     m_RigidBody.AddRelativeForce(Time.deltaTime * 1000f * -currentStrafeSpeed * Mathf.Abs(inputVector.x), 0, 0);
                 }
-
             }
             //inair
             if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) && !m_IsGrounded  && !Wallrunning)
